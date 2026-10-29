@@ -73,7 +73,10 @@ function Portrait({
   return (
     <img
       className={className}
-      src={embeddedPortraits?.[champion.id] ?? `/champions/${champion.id}.png`}
+      src={
+        embeddedPortraits?.[champion.id] ??
+        `${import.meta.env.BASE_URL}champions/${champion.id}.png`
+      }
       alt={champion.name}
       loading="lazy"
       draggable={false}

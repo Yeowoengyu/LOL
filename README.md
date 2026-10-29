@@ -14,6 +14,21 @@ npm run dev
 
 배포 파일은 `npm run build`로 생성되는 `dist/`입니다. 정적 호스팅 서비스에서 제공할 수 있습니다. `npm run preview`로 빌드 결과를 확인할 수 있습니다.
 
+## GitHub Pages 공개 배포
+
+`.github/workflows/deploy-pages.yml`은 `Main` 브랜치 푸시 또는 Actions의 수동 실행으로 단위 테스트와 빌드를 수행한 뒤 GitHub Pages에 배포합니다. 저장소의 **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 설정해야 합니다. GitHub 요금제와 저장소 공개 여부에 따라 Pages 사용 가능 여부가 다릅니다.
+
+이 저장소의 프로젝트 경로 `/LOL/`에 맞춰 빌드하며, 챔피언 이미지에도 Vite의 기본 경로를 적용합니다. 루트 경로를 사용하는 다른 호스팅 서비스에서는 기본 `npm run build`를 사용하세요. 저장소 이름을 바꾸거나 사용자 지정 도메인을 연결하면 워크플로의 `--base`도 해당 경로에 맞춰 수정하세요.
+
+배포 성공 여부와 실제 공개 주소는 GitHub Actions의 `deploy` 작업과 Pages 설정에서 확인하세요. 클라우드 개발 환경의 설정 저장·게시 또는 로컬 미리보기 실행만으로 홈페이지가 공개되지는 않습니다.
+
+배포 경로를 내부에서 검증하려면 다음 명령을 사용합니다. 미리보기 서버는 공개 호스팅이 아닙니다.
+
+```bash
+npm run build -- --base=/LOL/
+npm run preview -- --base=/LOL/ --port 4174 --strictPort
+```
+
 이 클라우드 환경에서 npm 기본 캐시 경로를 쓸 수 없다면 `npm --cache /workspace/.npm-cache ci`를 사용하세요.
 
 ## 설치 없이 열 수 있는 홈페이지 파일
